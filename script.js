@@ -10,16 +10,16 @@ fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
 
 // Custom weather images for each city
 const cityWeatherImages = {
-  'Cape Town': 'weather/cape-town.jpg',
-  'London': 'weather/london.jpg',
-  'Berlin': 'weather/berlin.jpg'
+  'Cape Town': 'images/cape-town.jpg',
+  'London': 'images/london.jpg',
+  'Berlin': 'images/berlin.jpg'
 };
 
 // Fetch weather data from Open-Meteo for multiple cities
 const cities = ['Cape Town', 'London', 'Berlin'];
 
 cities.forEach(city => {
-  const cityName = city === 'Kommetjie' ? 'Cape Town' : city;
+  const cityName = city;
 
   fetch(`https://api.open-meteo.com/v1/forecast?latitude=${getCoordinates(city)[0]}&longitude=${getCoordinates(city)[1]}&current_weather=true&hourly=temperature_2m,precipitation,weathercode,wind_speed_10m`)
     .then(response => response.json())
@@ -62,7 +62,7 @@ let currentIndex = 0;
 
 setInterval(() => {
   document.getElementById('image-gallery').innerHTML = `
-    <img src="$gallery/{images[currentIndex]}" alt="Image Gallery" class="gallery-image">
+    <img src="gallery/${images[currentIndex]}" alt="Image Gallery" class="gallery-image">
   `;
   currentIndex = (currentIndex + 1) % images.length;
 }, 5000); // Change image every 5 seconds
