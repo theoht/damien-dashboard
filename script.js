@@ -6,18 +6,26 @@ async function fetchWeather() {
     try {
         const responseCapeTown = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-33.9249&longitude=18.4241&current_weather=true');
         const dataCapeTown = await responseCapeTown.json();
-        capeTownElement.innerHTML = `<p>Cape Town: ${dataCapeTown.current_weather.temperature}°C</p>`;
+        if (dataCapeTown && dataCapeTown.current_weather) {
+            capeTownElement.innerHTML = `<p>Cape Town: ${dataCapeTown.current_weather.temperature}°C</p>`;
+        } else {
+            throw new Error("No weather data available");
+        }
     } catch (error) {
-        console.error('Error fetching weather:', error);
+        console.error('Error fetching weather for Cape Town:', error);
         capeTownElement.innerHTML = '<p>Error fetching weather data.</p>';
     }
 
     try {
         const responseKommetjie = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-34.1208&longitude=18.4362&current_weather=true');
         const dataKommetjie = await responseKommetjie.json();
-        kommetjieElement.innerHTML = `<p>Kommetjie: ${dataKommetjie.current_weather.temperature}°C</p>`;
+        if (dataKommetjie && dataKommetjie.current_weather) {
+            kommetjieElement.innerHTML = `<p>Kommetjie: ${dataKommetjie.current_weather.temperature}°C</p>`;
+        } else {
+            throw new Error("No weather data available");
+        }
     } catch (error) {
-        console.error('Error fetching weather:', error);
+        console.error('Error fetching weather for Kommetjie:', error);
         kommetjieElement.innerHTML = '<p>Error fetching weather data.</p>';
     }
 }
@@ -30,8 +38,13 @@ async function fetchNASAAPOD() {
     try {
         const response = await fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY');
         const data = await response.json();
-        nasaImageElement.src = data.url;
-        astronomyInfoElement.innerHTML = `<p>${data.title}</p><p>${data.explanation}</p>`;
+
+        if (data && data.url) {
+            nasaImageElement.src = data.url;
+            astronomyInfoElement.innerHTML = `<p>${data.title}</p><p>${data.explanation}</p>`;
+        } else {
+            throw new Error("No data found for NASA APOD");
+        }
     } catch (error) {
         console.error('Error fetching NASA APOD:', error);
         astronomyInfoElement.innerHTML = '<p>Error fetching NASA data.</p>';
