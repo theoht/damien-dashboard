@@ -21,6 +21,11 @@ body {
   .left-tab, .right-tab, .center-tab {
     width: 30%;
     padding: 20px;
+  }
+  
+  .sub-tab {
+    padding: 20px;
+    margin-bottom: 20px;
     border: 2px solid #ccc;
     border-radius: 10px;
     background-color: #f9f9f9;

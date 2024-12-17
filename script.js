@@ -11,9 +11,8 @@ fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
 // Fetch weather data from Open-Meteo for multiple cities
 const cities = ['Cape Town', 'London', 'Berlin'];
 
-
 cities.forEach(city => {
-  const cityName = city === 'Kommetjie' ? 'Cape Town' : city; // Open-Meteo expects 'Cape Town' for Kommetjie
+  const cityName = city === 'Kommetjie' ? 'Cape Town' : city;
 
   fetch(`https://api.open-meteo.com/v1/forecast?latitude=${getCoordinates(city)[0]}&longitude=${getCoordinates(city)[1]}&current_weather=true&hourly=temperature_2m,precipitation,weathercode,wind_speed_10m`)
     .then(response => response.json())
@@ -21,7 +20,7 @@ cities.forEach(city => {
       const temp = data.current_weather.temperature;
       const weatherDescription = data.current_weather.weathercode;
       const windSpeed = data.current_weather.wind_speed_10m;
-      const time = new Date().toLocaleString();
+      const time = new Date().toLocaleString("en-US", { timeZone: getTimeZone(city), hour: '2-digit', minute: '2-digit' });
       const weatherIcons = {
         0: '☀️', // Clear sky
         1: '🌤️', // Partly cloudy
@@ -66,4 +65,14 @@ function getCoordinates(city) {
     'Berlin': [52.52, 13.4050]
   };
   return coordinates[city] || [0, 0]; // Default to [0, 0] if city is not found
+}
+
+// Get timezone for cities (for weather time)
+function getTimeZone(city) {
+  const timeZones = {
+    'Cape Town': 'Africa/Johannesburg',
+    'London': 'Europe/London',
+    'Berlin': 'Europe/Berlin'
+  };
+  return timeZones[city] || 'UTC';
 }
