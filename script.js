@@ -47,7 +47,7 @@ function saveNote() {
 }
 
 // 3. Rotating Images Logic
-const images = ["image1.png", "image2.png", "image3.png"];
+const images = ["image1.jpg", "image2.jpg", "image3.jpg"];
 let currentImageIndex = 0;
 
 function rotateImage() {
