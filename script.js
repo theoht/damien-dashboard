@@ -8,6 +8,13 @@ fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
   })
   .catch(error => console.log(error));
 
+// Custom weather images for each city
+const cityWeatherImages = {
+  'Cape Town': 'weather/cape-town.jpg',
+  'London': 'weather/london.jpg',
+  'Berlin': 'weather/berlin.jpg'
+};
+
 // Fetch weather data from Open-Meteo for multiple cities
 const cities = ['Cape Town', 'London', 'Berlin'];
 
@@ -18,9 +25,9 @@ cities.forEach(city => {
     .then(response => response.json())
     .then(data => {
       const temp = data.current_weather.temperature;
-      const weatherDescription = data.current_weather.weathercode;
-      const windSpeed = data.current_weather.wind_speed_10m;
+      const windSpeed = data.current_weather.windspeed; // Fixed: Correct key for wind speed
       const time = new Date().toLocaleString("en-US", { timeZone: getTimeZone(city), hour: '2-digit', minute: '2-digit' });
+      
       const weatherIcons = {
         0: '☀️', // Clear sky
         1: '🌤️', // Partly cloudy
@@ -30,22 +37,23 @@ cities.forEach(city => {
         5: '❄️', // Snow
         6: '💨', // Windy
       };
-      const icon = weatherIcons[weatherDescription] || '🌤️';
+      const weatherCode = data.current_weather.weathercode || 1; // Default to partly cloudy
+      const icon = weatherIcons[weatherCode] || '🌤️';
 
-      // Add the weather entry with the image
+      // Add the weather entry with custom images
       document.getElementById('weather').innerHTML += `
         <div class="weather-entry">
-          <img src="weather-icon-placeholder.png" alt="Weather Icon"> <!-- Replace with your weather icon -->
+          <img src="${cityWeatherImages[cityName]}" alt="${cityName}" class="weather-icon">
           <div>
             <h4>${cityName}</h4>
             <p>Temperature: ${temp}°C ${icon}</p>
             <p>Wind Speed: ${windSpeed} m/s</p>
-            <p>Time: ${time}</p>
+            <p>Local Time: ${time}</p>
           </div>
         </div>
       `;
     })
-    .catch(error => console.log(error));
+    .catch(error => console.log(`Error fetching weather for ${city}: `, error));
 });
 
 // Image Gallery Rotation
@@ -53,7 +61,9 @@ const images = ['image1.jpg', 'image2.jpg', 'image3.jpg']; // Replace with your 
 let currentIndex = 0;
 
 setInterval(() => {
-  document.getElementById('image-gallery').innerHTML = `<img src="${images[currentIndex]}" alt="Image Gallery">`;
+  document.getElementById('image-gallery').innerHTML = `
+    <img src="$gallery/{images[currentIndex]}" alt="Image Gallery" class="gallery-image">
+  `;
   currentIndex = (currentIndex + 1) % images.length;
 }, 5000); // Change image every 5 seconds
 
