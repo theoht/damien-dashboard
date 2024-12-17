@@ -17,8 +17,8 @@ body {
 
 header {
     text-align: center;
-    margin-bottom: 20px;
     width: 100%;
+    margin: 20px 0;
 }
 
 h1 {
@@ -42,26 +42,25 @@ hr {
 }
 
 .top-left, .top-right, .rss-feed {
-    /* These elements take up the left, center, and right parts respectively */
     padding: 10px;
 }
 
 .top-left {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start; /* Anchoring to top-left */
 }
 
 .nasa-image {
     width: 100%;
-    max-width: 250px; /* Ensure the image is responsive and scales correctly */
+    max-width: 250px;
     height: auto;
 }
 
 .top-right {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start; /* Anchoring to top-right */
 }
 
 .weather {
@@ -74,7 +73,7 @@ hr {
 .location {
     display: inline-block;
     text-align: center;
-    width: 45%; /* Each location takes up 45% of the space */
+    width: 45%;
     margin: 10px;
 }
 
@@ -88,6 +87,8 @@ hr {
     padding: 20px;
     background-color: #ffffff;
     border: 1px solid #ccc;
+    margin-top: 10px;
+    width: 100%;
 }
 
 .rss-feed h3 {
@@ -97,10 +98,11 @@ hr {
 .image-rotator {
     width: 100%;
     text-align: center;
+    margin-top: 20px;
 }
 
 .rotating-image {
-    max-width: 100%; /* Ensures image scales correctly */
+    max-width: 100%;
     height: auto;
 }
 
@@ -117,4 +119,17 @@ ul#useful-links {
 ul#useful-links li {
     padding: 5px;
     font-size: 1em;
+}
+
+/* Ensure that the right column takes up all the remaining space */
+.right-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Keeps everything aligned to the top of the right column */
+    width: 100%;
+}
+
+.right-column > .image-rotator,
+.right-column > .links {
+    margin-top: 10px;
 }

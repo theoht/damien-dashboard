@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header>
+        <h1>Damien's Dashboard</h1>
+        <div class="quotes">
+            <marquee>"The universe is under no obligation to make sense to you." — Neil deGrasse Tyson</marquee>
+        </div>
+        <hr>
+    </header>
+
     <div class="container">
         <!-- Left Column: NASA Image and Astronomy Events -->
         <div class="top-left">
@@ -22,35 +30,38 @@
             <p>RSS feed content will be displayed here.</p>
         </div>
 
-        <!-- Right Column: Weather Data -->
-        <div class="top-right">
-            <h2>Weather Information</h2>
-            <div class="weather">
-                <div class="location">
-                    <img class="location-icon" src="cape-town-icon.png" alt="Cape Town">
-                    <p>Cape Town: Weather Data</p>
-                </div>
-                <div class="location">
-                    <img class="location-icon" src="kommetjie-icon.png" alt="Kommetjie">
-                    <p>Kommetjie: Weather Data</p>
+        <!-- Right Column: Weather Data, Image Gallery, and Useful Links -->
+        <div class="right-column">
+            <!-- Weather Data -->
+            <div class="top-right">
+                <h2>Weather Information</h2>
+                <div class="weather">
+                    <div class="location">
+                        <img class="location-icon" src="cape-town-icon.jpg" alt="Cape Town">
+                        <p>Cape Town: Weather Data</p>
+                    </div>
+                    <div class="location">
+                        <img class="location-icon" src="kommetjie-icon.jpg" alt="Kommetjie">
+                        <p>Kommetjie: Weather Data</p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Image Gallery Section -->
-        <div class="image-rotator">
-            <h2>Image Gallery</h2>
-            <img class="rotating-image" src="image1.jpg" alt="Rotating Image">
-        </div>
+            <!-- Image Gallery Section -->
+            <div class="image-rotator">
+                <h2>Image Gallery</h2>
+                <img class="rotating-image" src="image1.jpg" alt="Rotating Image">
+            </div>
 
-        <!-- Links Section -->
-        <div class="links">
-            <h2>Useful Links</h2>
-            <ul id="useful-links">
-                <li><a href="#">Link 1</a></li>
-                <li><a href="#">Link 2</a></li>
-                <li><a href="#">Link 3</a></li>
-            </ul>
+            <!-- Links Section -->
+            <div class="links">
+                <h2>Useful Links</h2>
+                <ul id="useful-links">
+                    <li><a href="#">Link 1</a></li>
+                    <li><a href="#">Link 2</a></li>
+                    <li><a href="#">Link 3</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 
