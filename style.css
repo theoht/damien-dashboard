@@ -47,26 +47,24 @@ hr {
 }
 
 .top-left {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: absolute; /* Absolute positioning to anchor to top-left */
-    top: 0;
-    left: 0;
+    position: fixed; /* Position it to the left side of the screen */
+    top: 20px; /* Add a small margin from the top */
+    left: 20px; /* Align it with the left edge */
+    width: 230px; /* Set a fixed width */
+    z-index: 10; /* Ensure it stays above other content */
 }
 
 .top-right {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: absolute; /* Absolute positioning to anchor to top-right */
-    top: 0;
-    right: 0;
+    position: fixed; /* Position it to the right side of the screen */
+    top: 20px; /* Add a small margin from the top */
+    right: 20px; /* Align it with the right edge */
+    width: 230px; /* Set a fixed width */
+    z-index: 10; /* Ensure it stays above other content */
 }
 
 .nasa-image {
     width: 100%;
-    max-width: 250px;
+    max-width: 230px;
     height: auto;
 }
 
