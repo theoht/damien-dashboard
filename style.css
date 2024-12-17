@@ -1,63 +1,72 @@
-/* General Reset */
-body, h1, h2, p {
+body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-    box-sizing: border-box;
+    background-color: #f0f0f0;
 }
 
-body {
-    background-color: #f4f4f9;
+.container {
+    display: grid;
+    grid-template-areas:
+        "title title title"
+        "calc rss weather"
+        "calc notes notes"
+        "image image image";
+    grid-gap: 20px;
     padding: 20px;
 }
 
-header {
+h1 {
+    grid-area: title;
     text-align: center;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #333;
-    padding-bottom: 10px;
 }
 
-header h1 {
-    font-size: 2rem;
-    color: #333;
+marquee {
+    font-size: 18px;
+    margin-bottom: 10px;
 }
 
-/* Dashboard Layout */
-.dashboard {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    grid-template-rows: auto auto;
-    gap: 20px;
-}
-
-
-/* Styling for each section */
 .box {
-    background: #ffffff;
-    border: 2px solid #333;
+    background-color: #ffffff;
     padding: 15px;
-    border-radius: 8px;
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
-/* Specific Layouts */
-.calculations {
-    grid-column: 1 / 2;
-    grid-row: 1 / 2;
+#calculations {
+    grid-area: calc;
 }
 
-.rss-feed {
-    grid-column: 2 / 3;
-    grid-row: 1 / 3;
+#rss-feed {
+    grid-area: rss;
 }
 
-.weather {
-    grid-column: 3 / 4;
-    grid-row: 1 / 2;
+#weather {
+    grid-area: weather;
 }
 
-.notes {
-    grid-column: 3 / 4;
-    grid-row: 2 / 3;
+#notes {
+    grid-area: notes;
+}
+
+#image-rotator {
+    grid-area: image;
+    text-align: center;
+}
+
+textarea {
+    width: 100%;
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+.note {
+    background-color: #f9f9f9;
+    margin: 5px 0;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

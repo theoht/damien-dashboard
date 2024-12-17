@@ -7,26 +7,49 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Title -->
         <h1>Damien's Dashboard</h1>
-    </header>
-    <main class="dashboard">
-        <section class="calculations box">
+        
+        <!-- Marquee Section -->
+        <marquee class="quotes">"The universe is under no obligation to make sense to you." — Neil deGrasse Tyson</marquee>
+        
+        <!-- Useful Calculations Section -->
+        <div class="box shadow-frame" id="calculations">
             <h2>Useful Physics Calculations</h2>
-            <p>List of options for the formulae to solve for.</p>
-        </section>
-        <section class="rss-feed box">
-            <h2>RSS Feed</h2>
-            <p>Feed of physics news.</p>
-        </section>
-        <section class="weather box">
-            <h2>Weather Widget</h2>
-            <p>Information about the date and weather.</p>
-        </section>
-        <section class="notes box">
+            <p>List of equations or useful reference material will go here.</p>
+        </div>
+
+        <!-- RSS Feed Section -->
+        <div class="box shadow-frame" id="rss-feed">
+            <h2>RSS Feed of Physics News</h2>
+            <p>Here you can integrate a dynamic feed for physics news.</p>
+        </div>
+
+        <!-- Weather Widgets Section -->
+        <div class="box shadow-frame" id="weather">
+            <h2>Weather Information</h2>
+            <div id="weather-cape-town">Loading weather for Cape Town...</div>
+            <div id="weather-kommetjie">Loading weather for Kommetjie...</div>
+        </div>
+
+        <!-- Note-taking Section -->
+        <div class="box shadow-frame" id="notes">
             <h2>Notes</h2>
-            <p>Note-taking area and list of saved notes.</p>
-        </section>
-    </main>
+            <textarea id="note-input" placeholder="Write your note here..."></textarea>
+            <button onclick="saveNote()">Save Note</button>
+            <div id="saved-notes"></div>
+        </div>
+
+        <!-- Image Rotator Section -->
+        <div class="box shadow-frame" id="image-rotator">
+            <h2>Image Gallery</h2>
+            <img id="rotating-image" src="image1.png" alt="Gallery Image" width="300px">
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
