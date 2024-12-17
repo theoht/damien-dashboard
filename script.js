@@ -60,7 +60,7 @@ setInterval(rotateImage, 5000); // Change image every 5 seconds
 
 // 4. NASA Astronomy Picture of the Day (APOD)
 async function fetchNASAAPOD() {
-    const apiKey = "DEMO_KEY"; // Replace "DEMO_KEY" with your NASA API key
+    const apiKey = "yALDzndsHs1nu0kv1KTtfR6ez9Wi2AVdlrTSgOS3";
     const apodContainer = document.getElementById("apod-content");
 
     try {
