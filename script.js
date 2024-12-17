@@ -11,6 +11,7 @@ fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
 // Fetch weather data from Open-Meteo for multiple cities
 const cities = ['Cape Town', 'London', 'Berlin'];
 
+
 cities.forEach(city => {
   const cityName = city === 'Kommetjie' ? 'Cape Town' : city; // Open-Meteo expects 'Cape Town' for Kommetjie
 
