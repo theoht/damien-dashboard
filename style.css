@@ -6,13 +6,19 @@ body {
 }
 
 .container {
-    width: 90%;
+    display: grid;
+    grid-template-columns: 25% 50% 25%; /* Left: 25%, Middle: 50%, Right: 25% */
+    grid-gap: 20px;
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
 header {
     text-align: center;
     margin-bottom: 20px;
+    width: 100%;
 }
 
 h1 {
@@ -28,35 +34,48 @@ h1 {
 hr {
     margin-top: 20px;
     border: 1px solid #ccc;
+    width: 100%;
 }
 
-.top-left, .top-right, .bottom-left, .bottom-right, .rss-feed, .links {
+.top-left, .top-right, .rss-feed, .links, .bottom-left, .bottom-right {
     margin: 20px 0;
 }
 
-.top-left, .top-right {
-    display: inline-block;
-    width: 48%;
-    vertical-align: top;
+.top-left, .top-right, .rss-feed {
+    /* These elements take up the left, center, and right parts respectively */
+    padding: 10px;
+}
+
+.top-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .nasa-image {
     width: 100%;
+    max-width: 250px; /* Ensure the image is responsive and scales correctly */
     height: auto;
 }
 
 .top-right {
-    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .weather {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 10px;
 }
 
 .location {
     display: inline-block;
     text-align: center;
+    width: 45%; /* Each location takes up 45% of the space */
+    margin: 10px;
 }
 
 .location-icon {
@@ -64,10 +83,15 @@ hr {
     height: 50px;
 }
 
-.bottom-left, .bottom-right {
-    display: inline-block;
-    width: 48%;
-    vertical-align: top;
+.rss-feed {
+    grid-column: 2; /* Ensures RSS feed takes up the middle section */
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+}
+
+.rss-feed h3 {
+    margin-bottom: 10px;
 }
 
 .image-rotator {
@@ -76,18 +100,13 @@ hr {
 }
 
 .rotating-image {
-    width: 100%;
+    max-width: 100%; /* Ensures image scales correctly */
     height: auto;
-}
-
-.rss-feed {
-    text-align: center;
-    width: 100%;
-    margin: 40px 0;
 }
 
 .links {
     margin-top: 20px;
+    text-align: center;
 }
 
 ul#useful-links {
@@ -97,4 +116,5 @@ ul#useful-links {
 
 ul#useful-links li {
     padding: 5px;
+    font-size: 1em;
 }
