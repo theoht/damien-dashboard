@@ -1,73 +1,59 @@
-// Fetching weather data for Cape Town and Kommetjie
-async function fetchWeather() {
-    const capeTownElement = document.getElementById('cape-town-weather');
-    const kommetjieElement = document.getElementById('kommetjie-weather');
+// Fetch NASA Image of the Day
+fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById('nasa-title').textContent = data.title;
+    document.getElementById('nasa-description').textContent = data.explanation;
+    document.getElementById('nasa-image-src').src = data.url;
+  })
+  .catch(error => console.log(error));
 
-    try {
-        const responseCapeTown = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-33.9249&longitude=18.4241&current_weather=true');
-        const dataCapeTown = await responseCapeTown.json();
-        if (dataCapeTown && dataCapeTown.current_weather) {
-            capeTownElement.innerHTML = `
-                <img class="location-icon" src="cape-town-icon.jpg" alt="Cape Town">
-                <p>Cape Town: ${dataCapeTown.current_weather.temperature}°C</p>`;
-        } else {
-            throw new Error("No weather data available");
-        }
-    } catch (error) {
-        console.error('Error fetching weather for Cape Town:', error);
-        capeTownElement.innerHTML = '<p>Error fetching weather data.</p>';
-    }
+// Fetch weather data from Open-Meteo for multiple cities
+const cities = ['Cape Town', 'Kommetjie', 'London', 'Berlin'];
 
-    try {
-        const responseKommetjie = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-34.1208&longitude=18.4362&current_weather=true');
-        const dataKommetjie = await responseKommetjie.json();
-        if (dataKommetjie && dataKommetjie.current_weather) {
-            kommetjieElement.innerHTML = `
-                <img class="location-icon" src="kommetjie-icon.jpg" alt="Kommetjie">
-                <p>Kommetjie: ${dataKommetjie.current_weather.temperature}°C</p>`;
-        } else {
-            throw new Error("No weather data available");
-        }
-    } catch (error) {
-        console.error('Error fetching weather for Kommetjie:', error);
-        kommetjieElement.innerHTML = '<p>Error fetching weather data.</p>';
-    }
+cities.forEach(city => {
+  const cityName = city === 'Kommetjie' ? 'Cape Town' : city; // Open-Meteo expects 'Cape Town' for Kommetjie
+
+  fetch(`https://api.open-meteo.com/v1/forecast?latitude=${getCoordinates(city)[0]}&longitude=${getCoordinates(city)[1]}&current_weather=true`)
+    .then(response => response.json())
+    .then(data => {
+      const temp = data.current_weather.temperature;
+      const weatherDescription = data.current_weather.weathercode;
+      const weatherIcons = {
+        0: '☀️', // Clear sky
+        1: '🌤️', // Partly cloudy
+        2: '⛅', // Cloudy
+        3: '🌧️', // Rain
+        4: '🌩️', // Thunderstorm
+        5: '❄️', // Snow
+        6: '💨', // Windy
+      };
+      const icon = weatherIcons[weatherDescription] || '🌤️';
+
+      document.getElementById('weather').innerHTML += `
+        <h4>${cityName}</h4>
+        <p>Temperature: ${temp}°C ${icon}</p>
+      `;
+    })
+    .catch(error => console.log(error));
+});
+
+// Image Gallery Rotation
+const images = ['image1.jpg', 'image2.jpg', 'image3.jpg']; // Replace with your image paths
+let currentIndex = 0;
+
+setInterval(() => {
+  document.getElementById('image-gallery').innerHTML = `<img src="${images[currentIndex]}" alt="Image Gallery">`;
+  currentIndex = (currentIndex + 1) % images.length;
+}, 5000); // Change image every 5 seconds
+
+// Get coordinates for cities (for Open-Meteo)
+function getCoordinates(city) {
+  const coordinates = {
+    'Cape Town': [-33.9249, 18.4232],
+    'Kommetjie': [-34.1078, 18.3513],
+    'London': [51.5074, -0.1278],
+    'Berlin': [52.52, 13.4050]
+  };
+  return coordinates[city] || [0, 0]; // Default to [0, 0] if city is not found
 }
-
-// Fetching NASA Image of the Day and Astronomy Events
-async function fetchNASAAPOD() {
-    const nasaImageElement = document.getElementById('nasa-image');
-    const astronomyInfoElement = document.getElementById('astronomy-info');
-    const astronomyEventsElement = document.getElementById('astronomy-events');
-
-    try {
-        const response = await fetch('https://api.nasa.gov/planetary/apod?api_key=yALDzndsHs1nu0kv1KTtfR6ez9Wi2AVdlrTSgOS3');
-        const data = await response.json();
-
-        if (data && data.url) {
-            nasaImageElement.src = data.url;
-            astronomyInfoElement.innerHTML = `<p>${data.title}</p><p>${data.explanation}</p>`;
-        } else {
-            throw new Error("No data found for NASA APOD");
-        }
-
-        // Fetch live astronomical events (Example: Astronomy events or a daily update, etc.)
-        const responseEvents = await fetch('https://api.le-systeme-solaire.net/rest/bodies/');
-        const eventsData = await responseEvents.json();
-        if (eventsData && eventsData.bodies) {
-            astronomyEventsElement.innerHTML = `<p>Live Astronomical Data: ${eventsData.bodies.length} celestial bodies listed.</p>`;
-        } else {
-            throw new Error("No astronomical event data found");
-        }
-    } catch (error) {
-        console.error('Error fetching NASA APOD or Astronomy events:', error);
-        astronomyInfoElement.innerHTML = '<p>Error fetching NASA data.</p>';
-        astronomyEventsElement.innerHTML = '<p>Error fetching astronomical data.</p>';
-    }
-}
-
-// Initialize the fetch functions
-window.onload = function() {
-    fetchWeather();
-    fetchNASAAPOD();
-};

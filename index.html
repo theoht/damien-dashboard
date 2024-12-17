@@ -1,71 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Damien's Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Damien's Dashboard</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Damien's Dashboard</h1>
-        <div class="quotes">
-            <marquee>"The universe is under no obligation to make sense to you." — Neil deGrasse Tyson</marquee>
-        </div>
-        <hr>
-    </header>
-
-    <div class="container">
-        <!-- Left Column: NASA Image and Astronomy Events -->
-        <div class="top-left">
-            <h2>Nasa Image of the Day</h2>
-            <img id="nasa-image" class="nasa-image" src="nasa-image.jpg" alt="NASA Image of the Day">
-            <div id="astronomy-info">
-                <p>Data will be fetched from NASA's API...</p>
-            </div>
-        </div>
-
-        <!-- Middle Column: RSS Feed -->
-        <div class="rss-feed">
-            <h3>RSS Feed</h3>
-            <p>RSS feed content will be displayed here.</p>
-        </div>
-
-        <!-- Right Column: Weather Data, Image Gallery, and Useful Links -->
-        <div class="right-column">
-            <!-- Weather Data -->
-            <div class="top-right">
-                <h2>Weather Information</h2>
-                <div class="weather">
-                    <div class="location" id="cape-town-weather">
-                        <img class="location-icon" src="cape-town-icon.jpg" alt="Cape Town">
-                        <p>Cape Town: Weather Data</p>
-                    </div>
-                    <div class="location" id="kommetjie-weather">
-                        <img class="location-icon" src="kommetjie-icon.jpg" alt="Kommetjie">
-                        <p>Kommetjie: Weather Data</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Image Gallery Section -->
-            <div class="image-rotator">
-                <h2>Image Gallery</h2>
-                <img class="rotating-image" src="image1.jpg" alt="Rotating Image">
-            </div>
-
-            <!-- Links Section -->
-            <div class="links">
-                <h2>Useful Links</h2>
-                <ul id="useful-links">
-                    <li><a href="#">Link 1</a></li>
-                    <li><a href="#">Link 2</a></li>
-                    <li><a href="#">Link 3</a></li>
-                </ul>
-            </div>
-        </div>
+  <header>
+    <h1 class="title">Damien's Dashboard</h1>
+    <marquee behavior="scroll" direction="left">"The cosmos is within us." - Carl Sagan</marquee>
+    <hr>
+  </header>
+  
+  <div class="content">
+    <div class="left-tab">
+      <!-- NASA Image of the Day -->
+      <div id="nasa-image">
+        <h3 id="nasa-title"></h3>
+        <img id="nasa-image-src" src="" alt="NASA Image of the Day">
+        <p id="nasa-description"></p>
+      </div>
+      
+      <!-- Live Astronomical Data -->
+      <div id="astro-data"></div>
     </div>
+    
+    <div class="center-tab">
+      <!-- RSS Feed (Placeholder) -->
+      <div id="rss-feed">
+        <h3>Astrophysics News</h3>
+        <p>Loading RSS feed...</p>
+      </div>
+    </div>
+    
+    <div class="right-tab">
+      <!-- Weather Data -->
+      <div id="weather"></div>
+      
+      <!-- Image Gallery -->
+      <div id="image-gallery"></div>
+      
+      <!-- Useful Links -->
+      <div id="links"></div>
+    </div>
+  </div>
 
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
