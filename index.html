@@ -19,18 +19,18 @@
         <!-- Top Left: NASA Image of the Day -->
         <div class="top-left">
             <h2>Nasa Image of the Day</h2>
-            <img src="nasa-image.jpg" alt="NASA Image of the Day" class="nasa-image">
+            <img id="nasa-image" src="nasa-image.jpg" alt="NASA Image of the Day" class="nasa-image">
         </div>
 
         <!-- Top Right: Weather for Cape Town and Kommetjie -->
         <div class="top-right">
             <h2>Weather Information</h2>
             <div class="weather">
-                <div class="location">
+                <div class="location" id="cape-town-weather">
                     <img src="cape-town-icon.png" alt="Cape Town" class="location-icon">
                     <p>Cape Town: Weather Data</p>
                 </div>
-                <div class="location">
+                <div class="location" id="kommetjie-weather">
                     <img src="kommetjie-icon.png" alt="Kommetjie" class="location-icon">
                     <p>Kommetjie: Weather Data</p>
                 </div>
@@ -40,7 +40,7 @@
         <!-- Bottom Left: Live Astronomical Event Info -->
         <div class="bottom-left">
             <h2>Live Astronomical Event Info</h2>
-            <p>Data will be fetched from NASA's API...</p>
+            <div id="astronomy-info">Loading astronomical event data...</div>
         </div>
 
         <!-- Bottom Right: Custom Rotating Images -->
