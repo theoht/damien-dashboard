@@ -9,39 +9,60 @@
 <body>
     <!-- Main Container -->
     <div class="container">
-        <!-- Title -->
-        <h1>Damien's Dashboard</h1>
-        
-        <!-- Marquee Section -->
-        <marquee class="quotes">"The universe is under no obligation to make sense to you." — Neil deGrasse Tyson</marquee>
+        <!-- Title and Marquee Section -->
+        <header>
+            <h1>Damien's Dashboard</h1>
+            <marquee class="quotes">"The universe is under no obligation to make sense to you." — Neil deGrasse Tyson</marquee>
+            <hr> <!-- Separator line -->
+        </header>
 
-        <!-- Weather Widgets Section -->
-        <div class="box shadow-frame" id="weather">
+        <!-- Top Left: NASA Image of the Day -->
+        <div class="top-left">
+            <h2>Nasa Image of the Day</h2>
+            <img src="nasa-image.jpg" alt="NASA Image of the Day" class="nasa-image">
+        </div>
+
+        <!-- Top Right: Weather for Cape Town and Kommetjie -->
+        <div class="top-right">
             <h2>Weather Information</h2>
-            <div id="weather-cape-town">Loading weather for Cape Town...</div>
-            <div id="weather-kommetjie">Loading weather for Kommetjie...</div>
-        </div>
-
-        <!-- Note-taking Section -->
-        <div class="box shadow-frame" id="notes">
-            <h2>Notes</h2>
-            <textarea id="note-input" placeholder="Write your note here..."></textarea>
-            <button onclick="saveNote()">Save Note</button>
-            <div id="saved-notes"></div>
-        </div>
-
-        <!-- Image Rotator Section -->
-        <div class="box shadow-frame" id="image-rotator">
-            <h2>Image Gallery</h2>
-            <img id="rotating-image" src="image1.jpg" alt="Gallery Image" width="300px">
-        </div>
-
-        <!-- NASA APOD Section -->
-        <div class="box shadow-frame" id="nasa-apod">
-            <h2>NASA Astronomy Picture of the Day</h2>
-            <div id="apod-content">
-                <p>Loading NASA's Astronomy Picture of the Day...</p>
+            <div class="weather">
+                <div class="location">
+                    <img src="cape-town-icon.png" alt="Cape Town" class="location-icon">
+                    <p>Cape Town: Weather Data</p>
+                </div>
+                <div class="location">
+                    <img src="kommetjie-icon.png" alt="Kommetjie" class="location-icon">
+                    <p>Kommetjie: Weather Data</p>
+                </div>
             </div>
+        </div>
+
+        <!-- Bottom Left: Live Astronomical Event Info -->
+        <div class="bottom-left">
+            <h2>Live Astronomical Event Info</h2>
+            <p>Data will be fetched from NASA's API...</p>
+        </div>
+
+        <!-- Bottom Right: Custom Rotating Images -->
+        <div class="bottom-right">
+            <h2>Image Gallery</h2>
+            <div class="image-rotator">
+                <img id="rotating-image" src="image1.jpg" alt="Gallery Image" class="rotating-image">
+            </div>
+        </div>
+
+        <!-- Center: RSS Feed Section -->
+        <div class="rss-feed">
+            <h2>RSS Feed</h2>
+            <div id="rss-feed-content">RSS Feed will go here...</div>
+        </div>
+
+        <!-- Useful Links Section -->
+        <div class="links">
+            <h2>Useful Links</h2>
+            <ul id="useful-links">
+                <!-- Add links here -->
+            </ul>
         </div>
     </div>
 

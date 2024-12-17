@@ -2,71 +2,100 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
+    background-color: #f4f4f9;
 }
 
 .container {
-    display: grid;
-    grid-template-areas:
-        "title title title"
-        "calc rss weather"
-        "calc notes notes"
-        "image image image";
-    grid-gap: 20px;
-    padding: 20px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 h1 {
-    grid-area: title;
-    text-align: center;
+    margin: 0;
+    font-size: 2.5em;
 }
 
-marquee {
-    font-size: 18px;
-    margin-bottom: 10px;
+.quotes {
+    margin-top: 10px;
+    font-size: 1.2em;
 }
 
-.box {
-    background-color: #ffffff;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-#calculations {
-    grid-area: calc;
-}
-
-#rss-feed {
-    grid-area: rss;
-}
-
-#weather {
-    grid-area: weather;
-}
-
-#notes {
-    grid-area: notes;
-}
-
-#image-rotator {
-    grid-area: image;
-    text-align: center;
-}
-
-textarea {
-    width: 100%;
-    height: 80px;
-    margin-bottom: 10px;
-}
-
-.note {
-    background-color: #f9f9f9;
-    margin: 5px 0;
-    padding: 5px;
+hr {
+    margin-top: 20px;
     border: 1px solid #ccc;
-    border-radius: 3px;
+}
+
+.top-left, .top-right, .bottom-left, .bottom-right, .rss-feed, .links {
+    margin: 20px 0;
+}
+
+.top-left, .top-right {
+    display: inline-block;
+    width: 48%;
+    vertical-align: top;
+}
+
+.nasa-image {
+    width: 100%;
+    height: auto;
+}
+
+.top-right {
+    text-align: right;
+}
+
+.weather {
     display: flex;
     justify-content: space-between;
-    align-items: center;
 }
+
+.location {
+    display: inline-block;
+    text-align: center;
+}
+
+.location-icon {
+    width: 50px;
+    height: 50px;
+}
+
+.bottom-left, .bottom-right {
+    display: inline-block;
+    width: 48%;
+    vertical-align: top;
+}
+
+.image-rotator {
+    width: 100%;
+    text-align: center;
+}
+
+.rotating-image {
+    width: 100%;
+    height: auto;
+}
+
+.rss-feed {
+    text-align: center;
+    width: 100%;
+    margin: 40px 0;
+}
+
+.links {
+    margin-top: 20px;
+}
+
+ul#useful-links {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul#useful-links li {
+    padding: 5px;
+}
+
