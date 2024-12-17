@@ -36,7 +36,7 @@ async function fetchNASAAPOD() {
     const astronomyInfoElement = document.getElementById('astronomy-info');
 
     try {
-        const response = await fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY');
+        const response = await fetch('https://api.nasa.gov/planetary/apod?api_key=yALDzndsHs1nu0kv1KTtfR6ez9Wi2AVdlrTSgOS3');
         const data = await response.json();
 
         if (data && data.url) {
