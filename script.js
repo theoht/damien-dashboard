@@ -9,16 +9,18 @@ fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
   .catch(error => console.log(error));
 
 // Fetch weather data from Open-Meteo for multiple cities
-const cities = ['Cape Town', 'Kommetjie', 'London', 'Berlin'];
+const cities = ['Cape Town', 'London', 'Berlin'];
 
 cities.forEach(city => {
   const cityName = city === 'Kommetjie' ? 'Cape Town' : city; // Open-Meteo expects 'Cape Town' for Kommetjie
 
-  fetch(`https://api.open-meteo.com/v1/forecast?latitude=${getCoordinates(city)[0]}&longitude=${getCoordinates(city)[1]}&current_weather=true`)
+  fetch(`https://api.open-meteo.com/v1/forecast?latitude=${getCoordinates(city)[0]}&longitude=${getCoordinates(city)[1]}&current_weather=true&hourly=temperature_2m,precipitation,weathercode,wind_speed_10m`)
     .then(response => response.json())
     .then(data => {
       const temp = data.current_weather.temperature;
       const weatherDescription = data.current_weather.weathercode;
+      const windSpeed = data.current_weather.wind_speed_10m;
+      const time = new Date().toLocaleString();
       const weatherIcons = {
         0: '☀️', // Clear sky
         1: '🌤️', // Partly cloudy
@@ -30,9 +32,17 @@ cities.forEach(city => {
       };
       const icon = weatherIcons[weatherDescription] || '🌤️';
 
+      // Add the weather entry with the image
       document.getElementById('weather').innerHTML += `
-        <h4>${cityName}</h4>
-        <p>Temperature: ${temp}°C ${icon}</p>
+        <div class="weather-entry">
+          <img src="weather-icon-placeholder.png" alt="Weather Icon"> <!-- Replace with your weather icon -->
+          <div>
+            <h4>${cityName}</h4>
+            <p>Temperature: ${temp}°C ${icon}</p>
+            <p>Wind Speed: ${windSpeed} m/s</p>
+            <p>Time: ${time}</p>
+          </div>
+        </div>
       `;
     })
     .catch(error => console.log(error));
@@ -51,7 +61,6 @@ setInterval(() => {
 function getCoordinates(city) {
   const coordinates = {
     'Cape Town': [-33.9249, 18.4232],
-    'Kommetjie': [-34.1078, 18.3513],
     'London': [51.5074, -0.1278],
     'Berlin': [52.52, 13.4050]
   };
