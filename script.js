@@ -57,3 +57,27 @@ function rotateImage() {
 }
 
 setInterval(rotateImage, 5000); // Change image every 5 seconds
+
+// 4. NASA Astronomy Picture of the Day (APOD)
+async function fetchNASAAPOD() {
+    const apiKey = "DEMO_KEY"; // Replace "DEMO_KEY" with your NASA API key
+    const apodContainer = document.getElementById("apod-content");
+
+    try {
+        const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`);
+        const data = await response.json();
+
+        // Display the APOD content
+        apodContainer.innerHTML = `
+            <h3>${data.title}</h3>
+            <img src="${data.url}" alt="${data.title}" width="100%">
+            <p>${data.explanation}</p>
+        `;
+    } catch (error) {
+        console.error("Error fetching NASA APOD:", error);
+        apodContainer.innerHTML = `<p>Failed to load NASA's Astronomy Picture of the Day.</p>`;
+    }
+}
+
+// Load NASA APOD on Page Load
+document.addEventListener("DOMContentLoaded", fetchNASAAPOD);
