@@ -141,25 +141,6 @@ footer {
   padding: 20px;
 }
 
-.marquee-container {
-  width: 100%;
-  overflow: hidden; /* Hide text outside bounds */
-  white-space: nowrap; /* Prevent line breaks */
-  position: relative;
-  height: 2rem; /* Adjust based on text size */
-  display: flex;
-  align-items: center;
-}
-
-.marquee-text {
-  position: absolute;
-  white-space: nowrap;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 1rem;
-  font-weight: bold;
-  color: #00f7ff;
-}
-
 /* Responsive Design */
 
 /* Handle small screens */
