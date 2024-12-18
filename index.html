@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Damien's Dashboard</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/skyviewer@1.0.0/dist/skyviewer.min.js"></script> <!-- Sky viewer script -->
 </head>
 <body>
   <header>
@@ -33,13 +34,14 @@
     </div>
     
     <div class="center-tab">
-      <div class="sub-tab tab-box" id="rss-feed">
-        <h3>Damien's Feed</h3>
-        <p>Loading RSS feed...</p>
+      <div class="sub-tab tab-box" id="space-news">
+        <h3>Space News</h3>
+        <div id="space-news-content">Loading space news...</div>
       </div>
-      <div class="sub-tab tab-box" id="asteroid-data">
-        <h3>Near-Earth Objects</h3>
-        <p>Loading asteroid data...</p>
+
+      <div class="sub-tab tab-box" id="sky-viewer">
+        <h3>Sky Viewer - Cape Town</h3>
+        <div id="star-map" style="height: 400px; width: 100%;"></div> <!-- Sky viewer container -->
       </div>
     </div>
     

@@ -61,86 +61,35 @@ setInterval(() => {
   currentIndex = (currentIndex + 1) % images.length;
 }, 5000);
 
-// NASA NeoWs API - Near-Earth Objects
-const NASA_API_KEY = 'yALDzndsHs1nu0kv1KTtfR6ez9Wi2AVdlrTSgOS3'; // Replace with your NASA API Key
-const getToday = () => new Date().toISOString().split("T")[0];
-const getOneWeekFromToday = () => {
-  const today = new Date();
-  const oneWeekLater = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000); // Add 7 days
-  return oneWeekLater.toISOString().split("T")[0];
-};
-
-fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${getToday()}&end_date=${getOneWeekFromToday()}&api_key=${NASA_API_KEY}`)
+// Fetch Space News
+fetch('https://api.nasa.gov/planetary/apod?api_key=yALDzndsHs1nu0kv1KTtfR6ez9Wi2AVdlrTSgOS3')
   .then(response => response.json())
   .then(data => {
-    const asteroidSection = document.getElementById("asteroid-data");
-    asteroidSection.innerHTML = ""; // Clear default loading message
-
-    // Extract near-Earth objects by date, and limit to top 8 results
-    const nearEarthObjects = data.near_earth_objects;
-    let count = 0; // Counter to limit results
-    for (const date in nearEarthObjects) {
-      nearEarthObjects[date].forEach((asteroid) => {
-        if (count >= 8) return; // Stop once 8 objects are processed
-        const name = asteroid.name;
-        const closestApproach = asteroid.close_approach_data[0];
-        const approachDate = closestApproach.close_approach_date;
-        const distance = parseFloat(closestApproach.miss_distance.kilometers).toFixed(1);
-        const velocity = parseFloat(closestApproach.relative_velocity.kilometers_per_hour).toFixed(1);
-
-        // Append asteroid data to the asteroid section
-        asteroidSection.innerHTML += `
-          <div class="asteroid-entry">
-            <h4>${name}</h4>
-            <p><strong>Approach Date:</strong> ${approachDate}</p>
-            <p><strong>Distance from Earth:</strong> ${distance} km</p>
-            <p><strong>Velocity:</strong> ${velocity} km/h</p>
-            <p class="source-tag">Source: NASA NeoWs</p>
-          </div>
-        `;
-        count++;
-      });
-    }
+    const spaceNewsContent = document.getElementById('space-news-content');
+    spaceNewsContent.innerHTML = `
+      <div class="rss-entry">
+        <h4><a href="${data.url}" target="_blank">${data.title}</a></h4>
+        <p>${data.explanation}</p>
+        <p class="source-tag">Source: NASA</p>
+      </div>
+    `;
   })
   .catch((error) => {
-    console.error("Error fetching asteroid data:", error);
-    document.getElementById("asteroid-data").innerHTML = "<p>Failed to load asteroid data.</p>";
+    console.error("Error fetching space news:", error);
+    document.getElementById('space-news-content').innerHTML = "<p>Failed to load space news.</p>";
   });
 
-// Fetch Space.com RSS feed (using a different CORS proxy)
-// Fetch Space.com RSS feed (using a different CORS proxy)
-fetch('https://cors-proxy.htmldriven.com/?url=https://www.space.com/rss')
-  .then(response => response.text()) // Fetch as text since RSS is in XML format
-  .then(xmlString => {
-    const rssFeedSection = document.getElementById('rss-feed');
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(xmlString, "text/xml");
-
-    const items = xmlDoc.getElementsByTagName('item');
-    rssFeedSection.innerHTML = ""; // Clear default loading message
-
-    Array.from(items).forEach(item => {
-      const title = item.getElementsByTagName('title')[0].textContent;
-      const description = item.getElementsByTagName('description')[0].textContent;
-      const link = item.getElementsByTagName('link')[0].textContent;
-      const pubDate = item.getElementsByTagName('pubDate')[0].textContent;
-
-      // Append RSS feed item to the section
-      rssFeedSection.innerHTML += `
-        <div class="rss-entry">
-          <h4><a href="${link}" target="_blank">${title}</a></h4>
-          <p>${description}</p>
-          <p><strong>Published:</strong> ${new Date(pubDate).toLocaleString()}</p>
-          <p class="source-tag">Source: Space.com RSS Feed</p>
-        </div>
-      `;
-    });
-  })
-  .catch((error) => {
-    console.error("Error fetching RSS feed:", error);
-    document.getElementById('rss-feed').innerHTML = "<p>Failed to load RSS feed.</p>";
-  });
-
+// Sky Viewer Widget for Cape Town
+const skyViewer = new SkyViewer({
+  container: document.getElementById('star-map'),
+  location: {
+    latitude: -33.9249,
+    longitude: 18.4232,
+  },
+  height: 400,
+  width: "100%",
+});
+skyViewer.start();
 
 // Utility functions
 function getCoordinates(city) {
