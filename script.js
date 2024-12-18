@@ -1,128 +1,83 @@
-// NASA Image of the Day
-fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
+// NASA NeoWs API Key
+const NASA_API_KEY = "DEMO_KEY"; // Replace with your NASA API Key
+
+// Fetch Near-Earth Objects (NEOs) from NASA's NeoWs API
+fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${getToday()}&end_date=${getOneWeekFromToday()}&api_key=${NASA_API_KEY}`)
   .then(response => response.json())
   .then(data => {
-    document.getElementById('nasa-title').textContent = data.title;
-    document.getElementById('nasa-description').textContent = data.explanation;
+    const asteroidSection = document.getElementById("asteroid-data");
+    asteroidSection.innerHTML = ""; // Clear default loading message
 
-    const imageElement = document.getElementById('nasa-image-src');
-    if (data.media_type === 'image') {
-      imageElement.src = data.url;
-    } else {
-      imageElement.alt = 'NASA media is not an image. Visit NASA for more.';
+    // Extract near-Earth objects by date
+    const nearEarthObjects = data.near_earth_objects;
+
+    for (const date in nearEarthObjects) {
+      nearEarthObjects[date].forEach((asteroid) => {
+        const name = asteroid.name;
+        const closestApproach = asteroid.close_approach_data[0];
+        const approachDate = closestApproach.close_approach_date;
+        const distance = parseFloat(closestApproach.miss_distance.kilometers).toFixed(1);
+        const velocity = parseFloat(closestApproach.relative_velocity.kilometers_per_hour).toFixed(1);
+
+        // Append asteroid data to the asteroid section
+        asteroidSection.innerHTML += `
+          <div class="asteroid-entry">
+            <h4>${name}</h4>
+            <p><strong>Approach Date:</strong> ${approachDate}</p>
+            <p><strong>Distance from Earth:</strong> ${distance} km</p>
+            <p><strong>Velocity:</strong> ${velocity} km/h</p>
+            <p class="source-tag">Source: NASA NeoWs</p>
+          </div>
+        `;
+      });
     }
   })
-  .catch(error => console.log('Error fetching NASA image:', error));
+  .catch((error) => {
+    console.error("Error fetching asteroid data:", error);
+    document.getElementById("asteroid-data").innerHTML = "<p>Failed to load asteroid data.</p>";
+  });
 
-// Custom weather images
-const cityWeatherImages = {
-  'Cape Town': 'cape-town.jpg',
-  'London': 'london.jpg',
-  'Berlin': 'berlin.jpg'
-};
+// Fetch Space.com RSS feed
+fetch('https://www.space.com/rss')
+  .then(response => response.text())
+  .then(data => {
+    const rssFeedSection = document.getElementById('rss-feed');
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(data, "text/xml");
 
-// Weather API
-const cities = ['Cape Town', 'London', 'Berlin'];
-cities.forEach(city => {
-  fetch(`https://api.open-meteo.com/v1/forecast?latitude=${getCoordinates(city)[0]}&longitude=${getCoordinates(city)[1]}&current_weather=true`)
-    .then(response => response.json())
-    .then(data => {
-      const temp = data.current_weather.temperature;
-      const windSpeed = data.current_weather.windspeed;
-      const time = new Date().toLocaleString("en-US", { timeZone: getTimeZone(city), hour: '2-digit', minute: '2-digit' });
+    const items = xmlDoc.getElementsByTagName('item');
+    rssFeedSection.innerHTML = ""; // Clear default loading message
 
-      const weatherIcons = { 0: '☀️', 1: '🌤️', 2: '⛅', 3: '🌧️' };
-      const weatherCode = data.current_weather.weathercode || 1;
-      const icon = weatherIcons[weatherCode] || '🌤️';
+    Array.from(items).forEach(item => {
+      const title = item.getElementsByTagName('title')[0].textContent;
+      const description = item.getElementsByTagName('description')[0].textContent;
+      const link = item.getElementsByTagName('link')[0].textContent;
+      const pubDate = item.getElementsByTagName('pubDate')[0].textContent;
 
-      document.getElementById('weather').innerHTML += `
-        <div class="weather-entry">
-          <img src="${cityWeatherImages[city]}" alt="${city}" class="weather-icon">
-          <div>
-            <h4>${city}</h4>
-            <p>Temperature: ${temp}°C ${icon}</p>
-            <p>Wind Speed: ${windSpeed} m/s</p>
-            <p>Local Time: ${time}</p>
-          </div>
+      // Append RSS feed item to the section
+      rssFeedSection.innerHTML += `
+        <div class="rss-entry">
+          <h4><a href="${link}" target="_blank">${title}</a></h4>
+          <p>${description}</p>
+          <p><strong>Published:</strong> ${new Date(pubDate).toLocaleString()}</p>
+          <p class="source-tag">Source: Space.com RSS Feed</p>
         </div>
       `;
-    })
-    .catch(error => console.log(`Error fetching weather for ${city}:`, error));
-});
-
-// Image gallery
-const images = ['image1.jpg', 'image2.jpg', 'image3.jpg'];
-let currentIndex = 0;
-
-setInterval(() => {
-  document.getElementById('image-gallery').innerHTML = `
-    <img src="${images[currentIndex]}" alt="Image Gallery" class="gallery-image">
-  `;
-  currentIndex = (currentIndex + 1) % images.length;
-}, 5000);
-
-// Astronomy events and space news
-const fetchAstronomicalEvents = async () => {
-  const response = await fetch('https://api.astronomyapi.com/api/v2/bodies/positions', {
-    headers: { Authorization: 'Bearer YOUR_API_KEY' }
+    });
+  })
+  .catch((error) => {
+    console.error("Error fetching RSS feed:", error);
+    document.getElementById('rss-feed').innerHTML = "<p>Failed to load RSS feed.</p>";
   });
-  const data = await response.json();
 
-  return data?.data?.map(event => ({
-    title: event.name,
-    date: new Date(event.timestamp * 1000).toLocaleDateString(),
-    description: `This is an event related to ${event.name}.`
-  }));
-};
-
-const fetchSpaceNews = async () => {
-  const response = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.space.com/feeds/all');
-  const data = await response.json();
-
-  return data.items.map(article => ({
-    title: article.title,
-    date: new Date(article.pubDate).toLocaleDateString(),
-    description: article.description
-  }));
-};
-
-const displayData = async () => {
-  const eventsList = document.getElementById('events-list');
-  try {
-    const [astroEvents, spaceNews] = await Promise.all([fetchAstronomicalEvents(), fetchSpaceNews()]);
-
-    const combinedData = [...astroEvents, ...spaceNews].sort((a, b) => new Date(a.date) - new Date(b.date));
-    const eventsHtml = combinedData.map(item => `
-      <li>
-        <h4>${item.title}</h4>
-        <p><strong>Date:</strong> ${item.date}</p>
-        <p>${item.description}</p>
-      </li>
-    `).join('');
-
-    eventsList.innerHTML = eventsHtml || '<li>No events or news found.</li>';
-  } catch (error) {
-    eventsList.innerHTML = '<li>Error loading data.</li>';
-  }
-};
-
-displayData();
-
-// Utility functions
-function getCoordinates(city) {
-  const coordinates = {
-    'Cape Town': [-33.9249, 18.4232],
-    'London': [51.5074, -0.1278],
-    'Berlin': [52.52, 13.4050]
-  };
-  return coordinates[city] || [0, 0];
+// Utility Functions
+function getToday() {
+  const today = new Date();
+  return today.toISOString().split("T")[0];
 }
 
-function getTimeZone(city) {
-  const timeZones = {
-    'Cape Town': 'Africa/Johannesburg',
-    'London': 'Europe/London',
-    'Berlin': 'Europe/Berlin'
-  };
-  return timeZones[city] || 'UTC';
+function getOneWeekFromToday() {
+  const today = new Date();
+  const oneWeekLater = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000); // Add 7 days
+  return oneWeekLater.toISOString().split("T")[0];
 }
