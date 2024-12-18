@@ -108,12 +108,13 @@ fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${getToday()}&end_date=$
   });
 
 // Fetch Space.com RSS feed (using a different CORS proxy)
-fetch('https://cors-anywhere.herokuapp.com/https://www.space.com/rss')
-  .then(response => response.json())
-  .then(data => {
+// Fetch Space.com RSS feed (using a different CORS proxy)
+fetch('https://cors-proxy.htmldriven.com/?url=https://www.space.com/rss')
+  .then(response => response.text()) // Fetch as text since RSS is in XML format
+  .then(xmlString => {
     const rssFeedSection = document.getElementById('rss-feed');
     const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(data.contents, "text/xml");
+    const xmlDoc = parser.parseFromString(xmlString, "text/xml");
 
     const items = xmlDoc.getElementsByTagName('item');
     rssFeedSection.innerHTML = ""; // Clear default loading message
@@ -139,6 +140,7 @@ fetch('https://cors-anywhere.herokuapp.com/https://www.space.com/rss')
     console.error("Error fetching RSS feed:", error);
     document.getElementById('rss-feed').innerHTML = "<p>Failed to load RSS feed.</p>";
   });
+
 
 // Utility functions
 function getCoordinates(city) {
