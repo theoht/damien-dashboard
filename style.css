@@ -1,132 +1,28 @@
-/* General Styles */
+/* Starry background and falling stars */
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background: radial-gradient(circle, rgba(0, 0, 0, 0.9) 0%, rgba(50, 50, 50, 0.8) 100%);
-  color: white;
-  position: relative;
+  background: #000000;
   overflow: hidden;
+  position: relative;
 }
 
-header {
-  text-align: center;
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background-color: white;
+  border-radius: 50%;
+  animation: twinkle 2s infinite ease-in-out;
 }
 
-.title {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 4em;
-  color: #00ffcc; /* Neon-like color */
-  text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc, 0 0 30px #00ffcc;
-  animation: pulse 1s infinite alternate;
+@keyframes twinkle {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
 }
 
-.marquee {
-  font-size: 18px;
-  color: #ffffff;
-  animation: marquee-animation 10s linear infinite;
-}
-
-@keyframes pulse {
-  0% { text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc, 0 0 30px #00ffcc; }
-  100% { text-shadow: 0 0 20px #ff00cc, 0 0 40px #ff00cc, 0 0 60px #ff00cc; }
-}
-
-@keyframes marquee-animation {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
-}
-
-/* Content Layout */
-.content {
-  display: flex;
-  gap: 20px;
-  padding: 20px;
-}
-
-.left-tab, .right-tab, .center-tab {
-  width: 30%;
-  padding: 20px;
-}
-
-.sub-tab {
-  padding: 20px;
-  margin-bottom: 20px;
-  border: 2px solid #444;
-  border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.7);
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-  animation: fadeIn 1s ease-in;
-}
-
-@keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
-
-/* NASA Image */
-#nasa-image img {
-  width: 100%;
-  height: auto;
-}
-
-/* Weather Section */
-.weather-entry {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  border: 1px solid #444;
-  border-radius: 5px;
-  padding: 10px;
-  background-color: rgba(0, 0, 0, 0.5);
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
-}
-
-.weather-icon {
-  width: 60px;
-  height: 60px;
-  margin-right: 15px;
-  object-fit: contain;
-}
-
-.weather-entry p {
-  font-size: 1.2em;
-}
-
-#image-gallery img {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-  margin: 10px 0;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
-}
-
-/* Links */
-.links-list {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.links-list li {
-  margin-bottom: 10px;
-}
-
-.links-list a {
-  text-decoration: none;
-  color: #00ffcc;
-  font-weight: bold;
-  font-size: 1.2em;
-  text-shadow: 0 0 5px #00ffcc;
-}
-
-.links-list a:hover {
-  color: #ff00cc;
-  text-decoration: underline;
-}
-
-/* Falling Stars */
 .falling-star {
   position: absolute;
   top: -10px;
@@ -147,3 +43,145 @@ header {
     transform: translateY(100vh) rotate(360deg);
   }
 }
+
+header {
+  text-align: center;
+  color: #ffffff;
+  font-size: 3rem;
+}
+
+.title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3.5rem;
+  color: #00f7ff;
+  text-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff, 0 0 30px #00f7ff;
+  margin-top: 30px;
+}
+
+.marquee {
+  font-size: 18px;
+  color: #00f7ff;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  animation: scroll-left 10s linear infinite;
+}
+
+@keyframes scroll-left {
+  from { left: 100%; }
+  to { left: -100%; }
+}
+
+/* Content styling */
+.content {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  justify-content: space-between;
+}
+
+.left-tab, .right-tab, .center-tab {
+  width: 30%;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+.sub-tab {
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 2px solid #00f7ff;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+h3 {
+  margin-bottom: 10px;
+  color: #00f7ff;
+}
+
+#nasa-image img {
+  width: 100%;
+  height: auto;
+}
+
+#weather {
+  display: flex;
+  flex-direction: column;
+}
+
+.weather-entry {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid #00f7ff;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.weather-entry img {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+}
+
+#image-gallery img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  margin: 10px 0;
+}
+
+.links-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.links-list li {
+  margin-bottom: 10px;
+}
+
+.links-list a {
+  text-decoration: none;
+  color: #00f7ff;
+  font-weight: bold;
+}
+
+.links-list a:hover {
+  text-decoration: underline;
+  color: #ff00ff;
+}
+
+/* Spacey footer */
+footer {
+  text-align: center;
+  color: #ffffff;
+  font-family: 'Orbitron', sans-serif;
+  padding: 20px;
+}
+
+.gallery-image {
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* Optional: Falling stars animation */
+.falling-stars-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.falling-stars-container .falling-star {
+  animation-duration: 4s;
+  animation-timing-function: linear;
+}
+

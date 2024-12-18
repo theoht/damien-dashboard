@@ -5,11 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Damien's Dashboard</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- Falling stars container -->
+  <div class="falling-stars-container">
+    <!-- Dynamically generated stars will appear here -->
+  </div>
+
   <header>
     <h1 class="title">Damien's Dashboard</h1>
-    <marquee behavior="scroll" direction="left">"The cosmos is within us." - Carl Sagan</marquee>
+    <marquee class="marquee">"The cosmos is within us." - Carl Sagan</marquee>
     <hr>
   </header>
   
@@ -51,5 +57,18 @@
   </div>
 
   <script src="script.js"></script>
+  <script>
+    // Generate falling stars
+    for (let i = 0; i < 50; i++) {
+      const star = document.createElement('div');
+      star.classList.add('falling-star');
+      star.style.left = `${Math.random() * 100}vw`;
+      star.style.animationDuration = `${Math.random() * 3 + 3}s`; // Randomize fall speed
+      star.style.animationDelay = `${Math.random() * 5}s`; // Randomize delay
+      star.style.animationName = 'fall';
+      star.style.animationTimingFunction = 'linear';
+      document.querySelector('.falling-stars-container').appendChild(star);
+    }
+  </script>
 </body>
 </html>

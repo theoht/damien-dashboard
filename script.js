@@ -49,6 +49,7 @@ cities.forEach(city => {
     .catch(error => console.log(`Error fetching weather for ${city}:`, error));
 });
 
+// fyucjk my life.
 // Image gallery
 const images = ['image1.jpeg', 'image2.jpeg', 'image3.jpeg', 'image4.jpeg', 'image5.jpeg', 'image6.jpeg', 'image7.jpeg'];
 let currentIndex = 0;
@@ -77,9 +78,3 @@ function getTimeZone(city) {
   };
   return timeZones[city] || 'UTC';
 }
-
-// Add falling stars effect
-document.body.insertAdjacentHTML('beforeend', '<div class="falling-star" style="--i:1;"></div>');
-document.body.insertAdjacentHTML('beforeend', '<div class="falling-star" style="--i:2;"></div>');
-document.body.insertAdjacentHTML('beforeend', '<div class="falling-star" style="--i:3;"></div>');
-// Add more stars as desired
