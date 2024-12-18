@@ -75,4 +75,3 @@ function getTimeZone(city) {
   };
   return timeZones[city] || 'UTC';
 }
-
