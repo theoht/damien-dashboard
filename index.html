@@ -8,14 +8,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Falling stars container -->
-  <div class="falling-stars-container">
-    <!-- Dynamically generated stars will appear here -->
-  </div>
-
   <header>
     <h1 class="title">Damien's Dashboard</h1>
-    <marquee class="marquee">"The cosmos is within us." - Carl Sagan</marquee>
+    <marquee class="marquee">Err and err and err again; but less, and less, and less
+      "Damien Rocks" - Bill Gates and Warren Buffett, unprompted
+      "Damien. Cool guy" - Lucas
+      "Do!" - Confucius, probably
+      Hi there!
+      I'd like to see a Large Language Model try to get as drunk as I did yesterday.
+      "The purpose of a system is what it does" - Wikipedia
+      You're not supposed to drink when you're pregnant because the baby isn't 21
+      Almonds is wood
+      the w orld is am a ch i ne
+      Dune appeals to the male fantasy because at its core, it is a story about a guy who has a lot of cool nicknames
+      "getting your steps in" is such a secular way to describe something as religious as Taking a Long Walk
+      "I always remember, [Hamming] would come into my office and try to solve a problem [...] I had a very big blackboard, and he'd start on one side, write down some integral, say, "I ain't afraid of nothin", and start working on it. So, now, when I start a big problem, I say, "I ain't afraid of nothin", and dive into it." —Bruce MacLennan
+    </marquee>
     <hr>
   </header>
   
@@ -26,26 +34,18 @@
         <img id="nasa-image-src" src="" alt="NASA Image of the Day">
         <p id="nasa-description"></p>
       </div>
-
-      <div class="sub-tab tab-box" id="links">
-        <h3>Useful Links</h3>
-        <ul class="links-list">
-          <li><a href="https://www.nasa.gov/" target="_blank">NASA Official Website</a></li>
-          <li><a href="https://skyandtelescope.org/" target="_blank">Sky & Telescope Magazine</a></li>
-          <li><a href="https://stellarium-web.org/" target="_blank">Stellarium Web Planetarium</a></li>
-          <li><a href="https://www.space.com/" target="_blank">Space.com</a></li>
-        </ul>
-      </div>
-    </div>
     
     <div class="center-tab">
-      <div class="sub-tab tab-box" id="demo-links">
+      <div class="sub-tab tab-box" id="Wordle and co.!">
         <h3>Demo Links</h3>
         <ul class="links-list">
-          <li><a href="https://example.com" target="_blank">Example Link 1</a></li>
-          <li><a href="https://example.com" target="_blank">Example Link 2</a></li>
-          <li><a href="https://example.com" target="_blank">Example Link 3</a></li>
-          <li><a href="https://example.com" target="_blank">Example Link 4</a></li>
+          <li><a href="https://www.nytimes.com/games/wordle/index.html" target="_blank">Wordle</a></li>
+          <li><a href="https://www.nytimes.com/games/connections" target="_blank">Connections</a></li>
+          <li><a href="https://www.nytimes.com/crosswords/game/mini" target="_blank">Mini Crossword</a></li>
+          <li><a href="https://loldle.net/" target="_blank">Loldle</a></li>
+          <li><a href="https://framed.wtf/" target="_blank">Framed</a></li>
+          <li><a href="https://guessthe.game/" target="_blank">Guess The Game</a></li>
+          <li><a href="https://neal.fun/password-game/" target="_blank">Mega-Challenge!!</a></li>
         </ul>
       </div>
     </div>
@@ -57,18 +57,5 @@
   </div>
 
   <script src="script.js"></script>
-  <script>
-    // Generate falling stars
-    for (let i = 0; i < 50; i++) {
-      const star = document.createElement('div');
-      star.classList.add('falling-star');
-      star.style.left = `${Math.random() * 100}vw`;
-      star.style.animationDuration = `${Math.random() * 3 + 3}s`; // Randomize fall speed
-      star.style.animationDelay = `${Math.random() * 5}s`; // Randomize delay
-      star.style.animationName = 'fall';
-      star.style.animationTimingFunction = 'linear';
-      document.querySelector('.falling-stars-container').appendChild(star);
-    }
-  </script>
 </body>
 </html>
