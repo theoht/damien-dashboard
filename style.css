@@ -19,20 +19,22 @@ body {
 .title-container {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Ensures the gifs and title are spaced out */
-  gap: 30px; /* Adds space between the GIFs and title */
+  justify-content: space-between; /* Ensure GIFs and title are spaced properly */
+  gap: 30px; /* Adds space between GIFs and title */
+  flex-wrap: nowrap; /* Prevent wrapping */
 }
 
 .gif-left, .gif-right {
   display: flex;
-  flex-direction: column;
-  gap: 10px; /* Adds space between GIFs vertically */
+  flex-direction: row; /* Ensure GIFs are laid out horizontally */
+  gap: 10px; /* Adds space between the GIFs horizontally */
 }
 
 .gif-left iframe, .gif-right iframe {
   width: 96px;  /* 20% larger than 80px (80px * 1.2) */
   height: 96px; /* 20% larger than 80px (80px * 1.2) */
 }
+
 
 header {
   text-align: center;
