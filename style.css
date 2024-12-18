@@ -16,27 +16,30 @@ body {
   color: #ECF87F; /* Title color */
 }
 
+/* Ensure the GIF containers inside the header are aligned horizontally */
 .title-container {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Space between title and GIFs */
-  gap: 30px; /* Adds space between the GIFs and title */
+  justify-content: space-between; /* Space out title and GIFs */
+  gap: 30px; /* Adds space between the title and GIFs */
 }
 
+/* For GIF containers, align the GIFs horizontally (row direction) */
 .gif-left, .gif-right {
   display: flex;
-  flex-direction: row; /* Ensure GIFs are laid out horizontally */
-  justify-content: flex-start; /* Align items to the start of the container */
-  gap: 10px; /* Space between the GIFs */
+  flex-direction: row; /* Ensure GIFs are laid out in a row */
+  gap: 10px; /* Adds space between each GIF */
 }
 
+/* Make sure each iframe has a consistent size */
 .gif-left iframe, .gif-right iframe {
-  width: 96px;  /* 20% larger than 80px (80px * 1.2) */
-  height: 96px; /* 20% larger than 80px (80px * 1.2) */
+  width: 96px;  /* Width of GIFs */
+  height: 96px; /* Height of GIFs */
 }
 
+/* Prevent the GIF containers from stretching or shrinking */
 .title-container > .gif-left, .title-container > .gif-right {
-  flex: 0 0 auto; /* Prevent the GIF containers from stretching */
+  flex: 0 0 auto; /* Prevent the containers from stretching */
 }
 
 header {
