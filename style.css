@@ -10,17 +10,17 @@ body {
   color: #00E091; /* Text color */
 }
 
-.title-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 30px; /* Adds space between the GIFs and title */
-}
-
 .title {
   font-family: 'Courier New', monospace; /* Monospace font for the title */
   font-size: 3.5rem;
   color: #ECF87F; /* Title color */
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Ensures the gifs and title are spaced out */
+  gap: 30px; /* Adds space between the GIFs and title */
 }
 
 .gif-left, .gif-right {
@@ -30,8 +30,8 @@ body {
 }
 
 .gif-left iframe, .gif-right iframe {
-  width: 80px;  /* 20% larger than 60px (60px * 1.2) */
-  height: 80px; /* 20% larger than 60px (60px * 1.2) */
+  width: 96px;  /* 20% larger than 80px (80px * 1.2) */
+  height: 96px; /* 20% larger than 80px (80px * 1.2) */
 }
 
 header {
