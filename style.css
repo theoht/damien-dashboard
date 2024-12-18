@@ -17,6 +17,12 @@ body {
   gap: 30px; /* Adds space between the GIFs and title */
 }
 
+.title {
+  font-family: 'Courier New', monospace; /* Monospace font for the title */
+  font-size: 3.5rem;
+  color: #ECF87F; /* Title color */
+}
+
 .gif-left, .gif-right {
   display: flex;
   flex-direction: column;
@@ -32,12 +38,6 @@ header {
   text-align: center;
   color: #00E091;
   font-size: 3rem;
-}
-
-.title {
-  font-family: 'Courier New', monospace;
-  font-size: 3.5rem;
-  color: #ECF87F; /* Title color */
 }
 
 .marquee {
