@@ -1,3 +1,17 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  text-align: center;
+}
+
+.marquee {
+  font-size: 18px;
+}
+
 .content {
   display: flex;
   gap: 20px;
@@ -5,9 +19,8 @@
 }
 
 .left-tab, .right-tab, .center-tab {
-  width: 30%; /* Adjust width to match for all three columns */
+  width: 30%;
   padding: 20px;
-  position: relative;
 }
 
 .sub-tab {
