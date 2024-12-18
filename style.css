@@ -10,6 +10,18 @@ body {
   color: white; /* Make all text default white */
 }
 
+/* Title container styling */
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* Adjusts spacing between GIFs and the title */
+}
+
+.giphy-embed {
+  border: none; /* Removes border from the iframe */
+}
+
 header {
   text-align: center;
   color: #ffffff;
@@ -128,6 +140,40 @@ footer {
   font-family: 'Orbitron', sans-serif;
   padding: 20px;
 }
+
+.marquee-container {
+  overflow: hidden; /* Hide overflow to create the scrolling effect */
+  height: 2rem; /* Adjust to fit one line of text */
+  position: relative;
+  width: 100%;
+}
+
+.marquee {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  animation: scroll-text 30s linear infinite; /* Adjust duration for speed */
+}
+
+.marquee p {
+  margin: 0;
+  padding: 0;
+  color: #00f7ff;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  white-space: pre; /* Ensures spacing is preserved */
+  line-height: 2rem; /* Matches the height of the container */
+}
+
+@keyframes scroll-text {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
 
 /* Responsive Design */
 
