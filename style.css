@@ -38,11 +38,13 @@ header {
   gap: 20px;
   padding: 20px;
   justify-content: space-between;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* Prevent wrapping unless needed in smaller screens */
 }
 
 .left-tab, .right-tab, .center-tab {
-  width: 30%;
+  flex: 1; /* Allow columns to take up equal space */
+  max-width: 30%; /* Ensure columns don't exceed proportional space */
+  min-width: 250px; /* Prevent columns from becoming too narrow */
   padding: 20px;
 }
 
@@ -125,4 +127,45 @@ footer {
   color: #ffffff;
   font-family: 'Orbitron', sans-serif;
   padding: 20px;
+}
+
+/* Responsive Design */
+
+/* Handle small screens */
+@media (max-width: 768px) {
+  .content {
+    flex-wrap: wrap; /* Allow columns to wrap into rows */
+  }
+
+  .left-tab, .center-tab, .right-tab {
+    flex: 1 1 100%; /* Take full width for each column when wrapping */
+    max-width: 100%; /* Ensure columns do not exceed screen width */
+  }
+
+  .sub-tab {
+    padding: 15px; /* Adjust padding for smaller screens */
+  }
+}
+
+/* Handle mobile landscape orientation */
+@media (orientation: landscape) and (max-height: 500px) {
+  .content {
+    gap: 10px; /* Reduce spacing between columns */
+  }
+
+  .left-tab, .center-tab, .right-tab {
+    max-width: 30%; /* Maintain three-column layout */
+    flex: 1; /* Adjust proportions to prevent wrapping */
+  }
+}
+
+/* Handle ultra-wide screens */
+@media (min-width: 1200px) {
+  .content {
+    gap: 30px; /* Increase space between columns */
+  }
+
+  .left-tab, .center-tab, .right-tab {
+    max-width: 32%; /* Slightly expand column width */
+  }
 }
