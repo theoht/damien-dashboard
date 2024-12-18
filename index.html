@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Damien's Dashboard</title>
   <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/skyviewer@1.0.0/dist/skyviewer.min.js"></script> <!-- Sky viewer script -->
 </head>
 <body>
   <header>
@@ -16,6 +15,12 @@
   
   <div class="content">
     <div class="left-tab">
+      <div class="sub-tab tab-box" id="nasa-image">
+        <h3 id="nasa-title"></h3>
+        <img id="nasa-image-src" src="" alt="NASA Image of the Day">
+        <p id="nasa-description"></p>
+      </div>
+
       <div class="sub-tab tab-box" id="links">
         <h3>Useful Links</h3>
         <ul class="links-list">
@@ -24,18 +29,6 @@
           <li><a href="https://stellarium-web.org/" target="_blank">Stellarium Web Planetarium</a></li>
           <li><a href="https://www.space.com/" target="_blank">Space.com</a></li>
         </ul>
-      </div>
-    </div>
-    
-    <div class="center-tab">
-      <div class="sub-tab tab-box" id="space-news">
-        <h3>Space News</h3>
-        <div id="space-news-content">Loading space news...</div>
-      </div>
-
-      <div class="sub-tab tab-box" id="sky-viewer">
-        <h3>Sky Viewer - Cape Town</h3>
-        <div id="star-map" style="height: 400px; width: 100%;"></div> <!-- Sky viewer container -->
       </div>
     </div>
     

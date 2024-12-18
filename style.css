@@ -18,8 +18,8 @@ header {
   padding: 20px;
 }
 
-.left-tab, .right-tab, .center-tab {
-  width: 30%;
+.left-tab, .right-tab {
+  width: 45%;
   padding: 20px;
 }
 
@@ -108,46 +108,4 @@ h3 {
   object-fit: contain;
   border: 1px solid #ddd;
   border-radius: 5px;
-}
-
-.asteroid-entry {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 15px;
-  background-color: #f9f9f9;
-}
-
-.asteroid-entry h4 {
-  margin: 0;
-  font-size: 1.2em;
-  color: #007BFF;
-}
-
-.asteroid-entry p {
-  margin: 5px 0;
-  font-size: 0.9em;
-}
-
-.rss-entry {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 15px;
-  background-color: #f9f9f9;
-}
-
-.rss-entry h4 {
-  margin: 0;
-  font-size: 1.2em;
-}
-
-.rss-entry p {
-  margin: 5px 0;
-}
-
-.source-tag {
-  font-size: 0.8em;
-  color: #888;
-  margin-top: 10px;
 }
