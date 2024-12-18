@@ -3,41 +3,239 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Damien's Dashboard</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Space Invaders</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: white;
+      text-align: center;
+    }
+
+    h1 {
+      color: #fff;
+      font-size: 32px;
+      margin-top: 20px;
+    }
+
+    #gameCanvas {
+      display: block;
+      margin: 0 auto;
+      background-color: #111;
+      border: 1px solid #fff;
+      margin-bottom: 20px;
+    }
+
+    /* Add a section for content around the game */
+    .content {
+      padding: 20px;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+
+    .tab {
+      padding: 10px;
+      background-color: #333;
+      color: white;
+      cursor: pointer;
+    }
+
+    .tab:hover {
+      background-color: #444;
+    }
+
+    /* Styling for the footer or other sections */
+    footer {
+      background-color: #222;
+      padding: 10px;
+      margin-top: 20px;
+    }
+
+  </style>
 </head>
 <body>
-  <header>
-    <h1 class="title">Damien's Dashboard</h1>
-    <marquee behavior="scroll" direction="left">"The cosmos is within us." - Carl Sagan</marquee>
-    <hr>
-  </header>
-  
-  <div class="content">
-    <div class="left-tab">
-      <div class="sub-tab tab-box" id="nasa-image">
-        <h3 id="nasa-title"></h3>
-        <img id="nasa-image-src" src="" alt="NASA Image of the Day">
-        <p id="nasa-description"></p>
-      </div>
+  <h1>Space Invaders</h1>
 
-      <div class="sub-tab tab-box" id="links">
-        <h3>Useful Links</h3>
-        <ul class="links-list">
-          <li><a href="https://www.nasa.gov/" target="_blank">NASA Official Website</a></li>
-          <li><a href="https://skyandtelescope.org/" target="_blank">Sky & Telescope Magazine</a></li>
-          <li><a href="https://stellarium-web.org/" target="_blank">Stellarium Web Planetarium</a></li>
-          <li><a href="https://www.space.com/" target="_blank">Space.com</a></li>
-        </ul>
-      </div>
+  <!-- Game Canvas -->
+  <canvas id="gameCanvas" width="480" height="320"></canvas>
+
+  <div class="content">
+    <div class="tabs">
+      <div class="tab">Tab 1</div>
+      <div class="tab">Tab 2</div>
+      <div class="tab">Tab 3</div>
     </div>
-    
-    <div class="right-tab">
-      <div class="sub-tab tab-box" id="weather"></div>
-      <div class="sub-tab tab-box" id="image-gallery"></div>
-    </div>
+
+    <p>Some additional content here...</p>
   </div>
 
-  <script src="script.js"></script>
+  <footer>
+    <p>Footer content goes here.</p>
+  </footer>
+
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+
+    const playerWidth = 40;
+    const playerHeight = 20;
+    const invaderWidth = 30;
+    const invaderHeight = 20;
+    const bulletWidth = 5;
+    const bulletHeight = 10;
+
+    let playerX = canvas.width / 2 - playerWidth / 2;
+    let playerY = canvas.height - playerHeight - 10;
+    let playerSpeed = 5;
+    let bullets = [];
+    let invaders = [];
+    let invaderSpeed = 1;
+
+    let rightPressed = false;
+    let leftPressed = false;
+    let spacePressed = false;
+
+    const invaderRows = 5;
+    const invaderColumns = 8;
+
+    // Player movement
+    document.addEventListener("keydown", keyDownHandler, false);
+    document.addEventListener("keyup", keyUpHandler, false);
+
+    function keyDownHandler(e) {
+      if (e.key === "Right" || e.key === "ArrowRight") {
+        rightPressed = true;
+      } else if (e.key === "Left" || e.key === "ArrowLeft") {
+        leftPressed = true;
+      } else if (e.key === " " && !spacePressed) {
+        spacePressed = true;
+        shootBullet();
+      }
+    }
+
+    function keyUpHandler(e) {
+      if (e.key === "Right" || e.key === "ArrowRight") {
+        rightPressed = false;
+      } else if (e.key === "Left" || e.key === "ArrowLeft") {
+        leftPressed = false;
+      } else if (e.key === " ") {
+        spacePressed = false;
+      }
+    }
+
+    // Create invaders
+    function createInvaders() {
+      for (let r = 0; r < invaderRows; r++) {
+        invaders[r] = [];
+        for (let c = 0; c < invaderColumns; c++) {
+          invaders[r][c] = { x: c * (invaderWidth + 10), y: r * (invaderHeight + 10), alive: true };
+        }
+      }
+    }
+
+    // Draw player
+    function drawPlayer() {
+      ctx.beginPath();
+      ctx.rect(playerX, playerY, playerWidth, playerHeight);
+      ctx.fillStyle = "#00F";
+      ctx.fill();
+      ctx.closePath();
+    }
+
+    // Draw bullets
+    function drawBullets() {
+      for (let i = 0; i < bullets.length; i++) {
+        if (bullets[i].y < 0) {
+          bullets.splice(i, 1);
+        } else {
+          ctx.beginPath();
+          ctx.rect(bullets[i].x, bullets[i].y, bulletWidth, bulletHeight);
+          ctx.fillStyle = "#F00";
+          ctx.fill();
+          ctx.closePath();
+          bullets[i].y -= 4;
+        }
+      }
+    }
+
+    // Draw invaders
+    function drawInvaders() {
+      for (let r = 0; r < invaderRows; r++) {
+        for (let c = 0; c < invaderColumns; c++) {
+          if (invaders[r][c].alive) {
+            ctx.beginPath();
+            ctx.rect(invaders[r][c].x, invaders[r][c].y, invaderWidth, invaderHeight);
+            ctx.fillStyle = "#0F0";
+            ctx.fill();
+            ctx.closePath();
+          }
+        }
+      }
+    }
+
+    // Check for bullet collision with invaders
+    function checkCollisions() {
+      for (let i = 0; i < bullets.length; i++) {
+        for (let r = 0; r < invaderRows; r++) {
+          for (let c = 0; c < invaderColumns; c++) {
+            if (invaders[r][c].alive && bullets[i].x > invaders[r][c].x && bullets[i].x < invaders[r][c].x + invaderWidth && bullets[i].y > invaders[r][c].y && bullets[i].y < invaders[r][c].y + invaderHeight) {
+              invaders[r][c].alive = false;
+              bullets.splice(i, 1);
+              return;
+            }
+          }
+        }
+      }
+    }
+
+    // Move player
+    function movePlayer() {
+      if (rightPressed && playerX < canvas.width - playerWidth) {
+        playerX += playerSpeed;
+      } else if (leftPressed && playerX > 0) {
+        playerX -= playerSpeed;
+      }
+    }
+
+    // Move invaders
+    function moveInvaders() {
+      for (let r = 0; r < invaderRows; r++) {
+        for (let c = 0; c < invaderColumns; c++) {
+          if (invaders[r][c].alive) {
+            invaders[r][c].y += invaderSpeed;
+          }
+        }
+      }
+    }
+
+    // Shoot a bullet
+    function shootBullet() {
+      bullets.push({ x: playerX + playerWidth / 2 - bulletWidth / 2, y: playerY });
+    }
+
+    // Update the game
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      drawPlayer();
+      drawBullets();
+      drawInvaders();
+      checkCollisions();
+      movePlayer();
+      moveInvaders();
+
+      requestAnimationFrame(draw);
+    }
+
+    // Initialize game
+    createInvaders();
+    draw();
+  </script>
 </body>
 </html>
