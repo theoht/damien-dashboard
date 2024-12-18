@@ -142,36 +142,22 @@ footer {
 }
 
 .marquee-container {
-  overflow: hidden; /* Hide overflow for clean scrolling */
-  width: 100%; /* Full width for the scrolling effect */
-  height: 2rem; /* Adjust height to fit the text */
+  width: 100%;
+  overflow: hidden; /* Hide text outside bounds */
+  white-space: nowrap; /* Prevent line breaks */
   position: relative;
-  white-space: nowrap; /* Prevent text wrapping */
+  height: 2rem; /* Adjust based on text size */
+  display: flex;
+  align-items: center;
 }
 
-.marquee {
-  display: inline-block;
-  animation: scroll-horizontal 30s linear infinite; /* Scroll horizontally */
-  white-space: nowrap; /* Keeps all the text in one line */
-}
-
-.marquee span {
-  display: inline-block;
-  margin-right: 30rem; /* Add space between lines */
-  color: #00f7ff;
+.marquee-text {
+  position: absolute;
+  white-space: nowrap;
   font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
   font-weight: bold;
-  font-size: 1rem; /* Adjust font size as needed */
-}
-
-/* Keyframe animation for horizontal scrolling */
-@keyframes scroll-horizontal {
-  from {
-    transform: translateX(100%); /* Start outside the container */
-  }
-  to {
-    transform: translateX(-100%); /* End outside the container */
-  }
+  color: #00f7ff;
 }
 
 /* Responsive Design */

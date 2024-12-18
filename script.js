@@ -47,7 +47,6 @@ cities.forEach(city => {
     .catch(error => console.log(`Error fetching weather for ${city}:`, error));
 });
 
-// fyucjk my life.
 // Image gallery
 const images = ['image1.jpeg', 'image2.jpeg', 'image3.jpeg', 'image4.jpeg', 'image5.jpeg', 'image6.jpeg', 'image7.jpeg'];
 let currentIndex = 0;
@@ -76,3 +75,49 @@ function getTimeZone(city) {
   };
   return timeZones[city] || 'UTC';
 }
+
+const marqueeContainer = document.getElementById("marquee-text");
+
+// Your list of messages
+const messages = [
+  "Err and err and err again; but less, and less, and less",
+  '"Damien Rocks" - Bill Gates and Warren Buffett, unprompted',
+  '"Damien. Cool guy" - Lucas',
+  '"Do!" - Confucius, probably',
+  "Hi there!",
+  "I'd like to see a Large Language Model try to get as drunk as I did yesterday.",
+  '"The purpose of a system is what it does" - Wikipedia',
+  "You're not supposed to drink when you're pregnant because the baby isn't 21",
+  "Almonds is wood",
+  "the w orld is am a ch i ne",
+  "Dune appeals to the male fantasy because at its core, it is a story about a guy who has a lot of cool nicknames",
+  '"getting your steps in" is such a secular way to describe something as religious as Taking a Long Walk',
+  '"I always remember, [Hamming] would come into my office and try to solve a problem [...] I had a very big blackboard, and he\'d start on one side, write down some integral, say, \'I ain\'t afraid of nothin\', and start working on it. So, now, when I start a big problem, I say, \'I ain\'t afraid of nothin\', and dive into it." —Bruce MacLennan',
+];
+
+let currentMessage = 0;
+
+function scrollMarquee() {
+  const message = messages[currentMessage];
+  marqueeContainer.textContent = message;
+
+  const containerWidth = marqueeContainer.parentElement.offsetWidth;
+  const textWidth = marqueeContainer.offsetWidth;
+
+  // Reset position to the far right
+  marqueeContainer.style.transform = `translateX(${containerWidth}px)`;
+
+  // Start scrolling
+  const duration = 10; // Speed in seconds for each message to scroll across
+  marqueeContainer.style.transition = `transform ${duration}s linear`;
+  marqueeContainer.style.transform = `translateX(-${textWidth}px)`;
+
+  // Pause at the end before moving to the next message
+  setTimeout(() => {
+    currentMessage = (currentMessage + 1) % messages.length; // Move to the next message
+    scrollMarquee(); // Recursively call for the next message
+  }, duration * 1000 + 2000); // Add a 2-second pause at the end of each scroll
+}
+
+// Start the scrolling
+scrollMarquee();
