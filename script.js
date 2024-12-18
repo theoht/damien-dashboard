@@ -28,7 +28,6 @@ cities.forEach(city => {
     .then(response => response.json())
     .then(data => {
       const temp = data.current_weather.temperature;
-      const windSpeed = data.current_weather.windspeed;
       const time = new Date().toLocaleString("en-US", { timeZone: getTimeZone(city), hour: '2-digit', minute: '2-digit' });
 
       const weatherIcons = { 0: '☀️', 1: '🌤️', 2: '⛅', 3: '🌧️' };
@@ -41,7 +40,6 @@ cities.forEach(city => {
           <div>
             <h4>${city}</h4>
             <p>Temperature: ${temp}°C ${icon}</p>
-            <p>Wind Speed: ${windSpeed} m/s</p>
             <p>Local Time: ${time}</p>
           </div>
         </div>`;

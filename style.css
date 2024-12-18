@@ -1,4 +1,4 @@
-/* Starry background and falling stars */
+/* General styling */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -7,42 +7,6 @@ body {
   position: relative;
   min-height: 100vh; /* Ensure body takes up at least the height of the viewport */
   overflow-y: auto; /* Allow vertical scrolling */
-}
-
-.star {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  background-color: white;
-  border-radius: 50%;
-  animation: twinkle 2s infinite ease-in-out;
-}
-
-@keyframes twinkle {
-  0% { opacity: 0.5; }
-  50% { opacity: 1; }
-  100% { opacity: 0.5; }
-}
-
-.falling-star {
-  position: absolute;
-  top: -10px;
-  width: 5px;
-  height: 5px;
-  background-color: white;
-  border-radius: 50%;
-  animation: fall 3s infinite linear;
-  opacity: 0.8;
-  animation-delay: calc(-3s * var(--i));
-}
-
-@keyframes fall {
-  0% {
-    transform: translateY(-100px) rotate(0deg);
-  }
-  100% {
-    transform: translateY(100vh) rotate(360deg);
-  }
 }
 
 header {
@@ -84,9 +48,6 @@ header {
 .left-tab, .right-tab, .center-tab {
   width: 30%;
   padding: 20px;
-  background-color: rgba(0, 0, 0, 0.7);
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
 }
 
 .sub-tab {
@@ -95,6 +56,8 @@ header {
   border: 2px solid #00f7ff;
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3); /* Glow effect */
+  backdrop-filter: blur(10px); /* Blur effect */
 }
 
 h3 {
@@ -156,14 +119,7 @@ h3 {
   color: #ff00ff;
 }
 
-/* Spacey footer */
-footer {
-  text-align: center;
-  color: #ffffff;
-  font-family: 'Orbitron', sans-serif;
-  padding: 20px;
-}
-
+/* Gallery and other sections */
 .gallery-image {
   width: 100%;
   max-height: 300px;
@@ -172,17 +128,10 @@ footer {
   border-radius: 5px;
 }
 
-/* Optional: Falling stars animation */
-.falling-stars-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.falling-stars-container .falling-star {
-  animation-duration: 4s;
-  animation-timing-function: linear;
+/* Optional: Spacey footer */
+footer {
+  text-align: center;
+  color: #ffffff;
+  font-family: 'Orbitron', sans-serif;
+  padding: 20px;
 }
