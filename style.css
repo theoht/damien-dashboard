@@ -10,22 +10,22 @@ body {
   color: #00E091; /* Text color */
 }
 
-/* Title container styling */
 .title-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px; /* Adjusts spacing between GIFs and the title */
+  gap: 30px; /* Adds space between the GIFs and title */
 }
 
 .gif-left, .gif-right {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  gap: 10px; /* Adds space between GIFs vertically */
 }
 
-.giphy-embed {
-  border: none; /* Removes border from the iframe */
+.gif-left iframe, .gif-right iframe {
+  width: 72px;  /* 20% larger than 60px (60px * 1.2) */
+  height: 72px; /* 20% larger than 60px (60px * 1.2) */
 }
 
 header {
@@ -38,7 +38,6 @@ header {
   font-family: 'Orbitron', sans-serif;
   font-size: 3.5rem;
   color: #ECF87F; /* Title color */
-  text-shadow: none; /* Removed glow effect */
 }
 
 .marquee {
