@@ -10,10 +10,6 @@
   position: relative;
 }
 
-.center-tab {
-  margin-top: 0; /* Ensure it's aligned with the other columns */
-}
-
 .sub-tab {
   padding: 20px;
   margin-bottom: 20px;
