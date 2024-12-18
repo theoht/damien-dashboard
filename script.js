@@ -62,7 +62,7 @@ setInterval(() => {
 }, 5000);
 
 // NASA NeoWs API - Near-Earth Objects
-const NASA_API_KEY = 'yALDzndsHs1nu0kv1KTtfR6ez9Wi2AVdlrTSgOS3';
+const NASA_API_KEY = 'yALDzndsHs1nu0kv1KTtfR6ez9Wi2AVdlrTSgOS3'; // Replace with your NASA API Key
 const getToday = () => new Date().toISOString().split("T")[0];
 const getOneWeekFromToday = () => {
   const today = new Date();
@@ -76,10 +76,12 @@ fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${getToday()}&end_date=$
     const asteroidSection = document.getElementById("asteroid-data");
     asteroidSection.innerHTML = ""; // Clear default loading message
 
-    // Extract near-Earth objects by date
+    // Extract near-Earth objects by date, and limit to top 8 results
     const nearEarthObjects = data.near_earth_objects;
+    let count = 0; // Counter to limit results
     for (const date in nearEarthObjects) {
       nearEarthObjects[date].forEach((asteroid) => {
+        if (count >= 8) return; // Stop once 8 objects are processed
         const name = asteroid.name;
         const closestApproach = asteroid.close_approach_data[0];
         const approachDate = closestApproach.close_approach_date;
@@ -96,6 +98,7 @@ fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${getToday()}&end_date=$
             <p class="source-tag">Source: NASA NeoWs</p>
           </div>
         `;
+        count++;
       });
     }
   })
@@ -104,13 +107,13 @@ fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${getToday()}&end_date=$
     document.getElementById("asteroid-data").innerHTML = "<p>Failed to load asteroid data.</p>";
   });
 
-// Fetch Space.com RSS feed
-fetch('https://www.space.com/rss')
-  .then(response => response.text())
+// Fetch Space.com RSS feed (using CORS proxy)
+fetch('https://api.allorigins.win/get?url=' + encodeURIComponent('https://www.space.com/rss'))
+  .then(response => response.json())
   .then(data => {
     const rssFeedSection = document.getElementById('rss-feed');
     const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(data, "text/xml");
+    const xmlDoc = parser.parseFromString(data.contents, "text/xml");
 
     const items = xmlDoc.getElementsByTagName('item');
     rssFeedSection.innerHTML = ""; // Clear default loading message
