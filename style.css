@@ -24,8 +24,8 @@ body {
 }
 
 .gif-left iframe, .gif-right iframe {
-  width: 72px;  /* 20% larger than 60px (60px * 1.2) */
-  height: 72px; /* 20% larger than 60px (60px * 1.2) */
+  width: 80px;  /* 20% larger than 60px (60px * 1.2) */
+  height: 80px; /* 20% larger than 60px (60px * 1.2) */
 }
 
 header {
@@ -35,7 +35,7 @@ header {
 }
 
 .title {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Courier New', monospace;
   font-size: 3.5rem;
   color: #ECF87F; /* Title color */
 }
@@ -43,7 +43,7 @@ header {
 .marquee {
   font-size: 18px;
   color: #ECF87F; /* Marquee text color */
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Courier New', monospace;
   font-weight: bold;
   animation: scroll-left 10s linear infinite;
 }
