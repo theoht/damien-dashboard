@@ -107,8 +107,8 @@ fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${getToday()}&end_date=$
     document.getElementById("asteroid-data").innerHTML = "<p>Failed to load asteroid data.</p>";
   });
 
-// Fetch Space.com RSS feed (using CORS proxy)
-fetch('https://api.allorigins.win/get?url=' + encodeURIComponent('https://www.space.com/rss'))
+// Fetch Space.com RSS feed (using a different CORS proxy)
+fetch('https://cors-anywhere.herokuapp.com/https://www.space.com/rss')
   .then(response => response.json())
   .then(data => {
     const rssFeedSection = document.getElementById('rss-feed');
