@@ -4,8 +4,9 @@ body {
   margin: 0;
   padding: 0;
   background: #000000;
-  overflow: hidden;
   position: relative;
+  min-height: 100vh; /* Ensure body takes up at least the height of the viewport */
+  overflow-y: auto; /* Allow vertical scrolling */
 }
 
 .star {
@@ -77,6 +78,7 @@ header {
   gap: 20px;
   padding: 20px;
   justify-content: space-between;
+  flex-wrap: wrap; /* Allow wrapping of elements */
 }
 
 .left-tab, .right-tab, .center-tab {
@@ -184,4 +186,3 @@ footer {
   animation-duration: 4s;
   animation-timing-function: linear;
 }
-
