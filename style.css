@@ -142,38 +142,37 @@ footer {
 }
 
 .marquee-container {
-  overflow: hidden; /* Hide overflow to create the scrolling effect */
-  height: 2rem; /* Adjust to fit one line of text */
+  overflow: hidden; /* Hide overflow for clean scrolling */
+  width: 100%; /* Full width for the scrolling effect */
+  height: 2rem; /* Adjust height to fit the text */
   position: relative;
-  width: 100%;
+  white-space: nowrap; /* Prevent text wrapping */
 }
 
 .marquee {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  animation: scroll-text 30s linear infinite; /* Adjust duration for speed */
+  display: inline-block;
+  animation: scroll-horizontal 30s linear infinite; /* Scroll horizontally */
+  white-space: nowrap; /* Keeps all the text in one line */
 }
 
-.marquee p {
-  margin: 0;
-  padding: 0;
+.marquee span {
+  display: inline-block;
+  margin-right: 30rem; /* Add space between lines */
   color: #00f7ff;
   font-family: 'Orbitron', sans-serif;
   font-weight: bold;
-  white-space: pre; /* Ensures spacing is preserved */
-  line-height: 2rem; /* Matches the height of the container */
+  font-size: 1rem; /* Adjust font size as needed */
 }
 
-@keyframes scroll-text {
-  0% {
-    transform: translateY(100%);
+/* Keyframe animation for horizontal scrolling */
+@keyframes scroll-horizontal {
+  from {
+    transform: translateX(100%); /* Start outside the container */
   }
-  100% {
-    transform: translateY(-100%);
+  to {
+    transform: translateX(-100%); /* End outside the container */
   }
 }
-
 
 /* Responsive Design */
 
